@@ -6,6 +6,5 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-actor = Actor.new({first_name: "Benedict", last_name: "Cumberbatch", known_for: "Sherlock"})
-actor.save
-
+movie = Movie.create(title: 'Catch me if you can', year:2001, plot: "guy want to finesse the system")
+movie = Movie.create(title: 'The Wolf of Wall Street', year: 2018, plot: "trading stocks" )
