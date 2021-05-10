@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  get "all_movies", controller: "movies", action: "all_movies"
-  get "first_movie", controller: "movies", action: "first_movie"
+  get "/actor/q", controller: "movies", action: "q_actor"
+  get "/actor/:id/", controller: "movies", action: "url_actor"
+  post "/actor/movies", controller: "movies", action: "body_actor"
 end
