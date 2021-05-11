@@ -1,17 +1,23 @@
 class MoviesController < ApplicationController
-  def q_actor
-    actor_value = params[:id].to_i
-    actor = Actor.find_by(id: actor_value)
-    render  json: actor.to_json
+  def index
+    movie = Movie.all
+    render json: movie.to_json
   end
-  def url_actor
-    actor_value = params[:id].to_i
-    actor = Actor.find_by(id: actor_value)
-    render  json: actor.to_json
+  def show
+    movie = Movie.find(params[:id])
+    render json: movie.to_json
   end
-  def body_actor
-    actor_value = params[:id].to_i
-    actor = Actor.find_by(id: actor_value)
-    render  json: actor.to_json
+  def update
+    movie = Movie.find(params[:id])
+    movie.title = movie[:title] || movie.title
+    movie.year = movie[:year] || movie.year
+    movie.plot = movie[:plot] || movie.plot
+
   end
+  def destroy
+    movie = Movie.find(params[:id])
+    movie.destroy
+    render json: {message: "This product is deleted the product"}
+  end
+
 end

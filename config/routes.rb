@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  get "/actor/q", controller: "movies", action: "q_actor"
-  get "/actor/:id/", controller: "movies", action: "url_actor"
-  post "/actor/movies", controller: "movies", action: "body_actor"
+  get "/actors/", controller: "actors", action: "index"
+  get "/movies/", controller: "movies", action: "index"
+  get "/actors/:id", controller: "actors", action:"show"
+  get "/movies/:id", controller: "movies", action:"show"
+  patch "/actors/:id", controller: "actors", action: "update"
+  patch "/movies/:id", controller: "movies", action: "update"
+  delete "/actors/:id", controller: "actors", action: "destroy"
+  delete "/movies/:id", controller: "movies", action: "destroy"
+ 
 end
