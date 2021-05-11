@@ -14,6 +14,16 @@ class MoviesController < ApplicationController
     movie.plot = movie[:plot] || movie.plot
 
   end
+
+  def create
+    movie = Movie.create({
+      title: params[:title],
+      year: params[:year],
+      plot: params[:plot]
+    })
+    movie.save
+    render json: {message: "your information has been updated"}
+  end
   def destroy
     movie = Movie.find(params[:id])
     movie.destroy

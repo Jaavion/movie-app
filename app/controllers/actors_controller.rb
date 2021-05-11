@@ -19,4 +19,13 @@ class ActorsController < ApplicationController
     actor.known_for = actor[:known_for] || actor.known_for
     render json: {message: "updated your information"}
   end
+  def create 
+    actor = actor.new({
+    first_name: actor[:first_name],
+    last_name: actor[:last_name],
+    known_for: actor[:known_for]
+    })
+    actor.save
+    render json: {message: "your information has been saved"}
+  end
 end
