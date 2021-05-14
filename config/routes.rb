@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   patch "/movies/:id", controller: "movies", action: "update"
   delete "/actors/:id", controller: "actors", action: "destroy"
   delete "/movies/:id", controller: "movies", action: "destroy"
-  post "/actors/:id", controller: "actors", action: "create"
-  post "/movies/:id", controller: "movies", action: "create"
+  post "/actors/", controller: "actors", action: "create"
+  post "/movies/", controller: "movies", action: "create"
 
 end

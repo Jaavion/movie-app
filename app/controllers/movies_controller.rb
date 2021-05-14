@@ -12,10 +12,16 @@ class MoviesController < ApplicationController
     movie.title = movie[:title] || movie.title
     movie.year = movie[:year] || movie.year
     movie.plot = movie[:plot] || movie.plot
-
+    movie.save
+    if movie.save == false
+      render json: movie.errors.full_messages.to_json
+    else
+      render json: {message: movie.save}
+    end
   end
 
   def create
+
     movie = Movie.create({
       title: params[:title],
       year: params[:year],
@@ -25,7 +31,11 @@ class MoviesController < ApplicationController
 
     })
     movie.save
-    render json: {message: "your information has been updated"}
+    if movie.save == false
+      render json: movie.errors.full_messages.to_json
+    else
+      render json: {message: movie.save}
+    end
   end
   def destroy
     movie = Movie.find(params[:id])

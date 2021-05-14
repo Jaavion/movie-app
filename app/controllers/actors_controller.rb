@@ -17,7 +17,13 @@ class ActorsController < ApplicationController
     actor.first_name = actor[:first_name] || actor.first_name
     actor.last_name = actor[:last_name] || actor.last_name
     actor.known_for = actor[:known_for] || actor.known_for
-    render json: {message: "updated your information"}
+    actor.save
+    if actor.save == false
+      render json: actor.errors.full_messages.to_json
+    else
+      render json: {message: actor.save}
+    end
+
   end
   def create 
     actor = Actor.new({
@@ -28,6 +34,10 @@ class ActorsController < ApplicationController
       age: params[:age]
     })
     actor.save
-    render json: {message: "your information has been saved"}
+    if actor.save == false
+      render json: actor.errors.full_messages.to_json
+    else
+      render json: {message: actor.save}
+    end
   end
 end
