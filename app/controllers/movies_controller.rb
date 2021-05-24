@@ -1,10 +1,14 @@
 class MoviesController < ApplicationController
   def index
+    if current_user
     movie = Movie.where("english = ?", true)
     render json: movie.to_json
+    else
+      render json: [], status_code: unauthorized
+    end
   end
   def show
-    movie = Movie.find(params[:id])
+    movie = Movie.find(params[:id]).actors
     render json: movie.to_json
   end
   def update
@@ -12,6 +16,7 @@ class MoviesController < ApplicationController
     movie.title = movie[:title] || movie.title
     movie.year = movie[:year] || movie.year
     movie.plot = movie[:plot] || movie.plot
+    movie.actors = movie[:actors] || movie.actors
     movie.save
     if movie.save == false
       render json: movie.errors.full_messages.to_json
