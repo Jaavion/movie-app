@@ -5,4 +5,6 @@ class Movie < ApplicationRecord
   validates :director, presence: true
   validates :director, length: {minimum: 2}
   has_many :actors
+  has_many :movie_genres
+  has_many :genres, through: :movie_genres
 end

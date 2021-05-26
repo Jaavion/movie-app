@@ -38,3 +38,5 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 #gets json web token
 gem 'jwt'
+
+gem 'active_model_serializers'
