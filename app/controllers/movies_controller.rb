@@ -1,12 +1,12 @@
 class MoviesController < ApplicationController
-  before_action :authenticate_admin, except: [:index, :show]
+  # before_action :authenticate_admin, except: [:index, :show]
   def index
-    if current_user
+    # if current.user
     movie = Movie.where("english = ?", true)
     render json: movie.to_json
-    else
-      render json: [], status_code: unauthorized
-    end
+    # else
+      # render json: [], status_code: unauthorized
+    # end
   end
   def show
     movie = Movie.find(params[:id]).actors
