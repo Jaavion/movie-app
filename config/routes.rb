@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  get 'users/name'
-  get 'users/email'
-  get 'users/password'
-  get 'users/password_confirmation'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   get "/actors/", controller: "actors", action: "index"
   get "/movies/", controller: "movies", action: "index"

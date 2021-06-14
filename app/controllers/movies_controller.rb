@@ -1,28 +1,29 @@
 class MoviesController < ApplicationController
   # before_action :authenticate_admin, except: [:index, :show]
   def index
-    # if current.user
-    movie = Movie.where("english = ?", true)
-    render json: movie.to_json
+    # if current_user
+      movie = Movie.where("english = ?", true)
+      render json: movie.to_json
     # else
-      # render json: [], status_code: unauthorized
-    # end
+    #   render json: [], status_code: unauthorized
+      # end
   end
   def show
-    movie = Movie.find(params[:id]).actors
+    movie = Movie.find(params[:id])
     render json: movie.to_json
   end
   def update
     movie = Movie.find(params[:id])
-    movie.title = movie[:title] || movie.title
-    movie.year = movie[:year] || movie.year
-    movie.plot = movie[:plot] || movie.plot
-    movie.actors = movie[:actors] || movie.actors
-    movie.save
-    if movie.save == false
+    movie.title = params[:title] || movie.title
+    movie.year = params[:year] || movie.year
+    movie.plot = params[:plot] || movie.plot
+    movie.actors = params[:actors] || movie.actors
+    movie.director = params[:director] || movie.director
+    movie.image_url = params[:image_url] || movie.image_url
+    if movie.save 
+      render json: movie
+    else 
       render json: movie.errors.full_messages.to_json
-    else
-      render json: {message: movie.save}
     end
   end
 
@@ -33,14 +34,14 @@ class MoviesController < ApplicationController
       year: params[:year],
       plot: params[:plot],
       english: params[:english],
-      director: params[:director]
+      director: params[:director],
+      image_url: params[:image_url]
 
     })
-    movie.save
-    if movie.save == false
-      render json: movie.errors.full_messages.to_json
+    if movie.save
+      render json: movie
     else
-      render json: {message: movie.save}
+      render json: {errors: movie.errors.full_messages}, status: 422
     end
   end
   def destroy

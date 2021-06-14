@@ -1,5 +1,5 @@
 class ActorsController < ApplicationController
-  before_action :authenticate_admin, except: [:index, :show]
+  # before_action :authenticate_admin, except: [:index, :show]
   def index
     actor = Actor.order(age: :desc)
     render json: actor.to_json
@@ -18,11 +18,10 @@ class ActorsController < ApplicationController
     actor.first_name = actor[:first_name] || actor.first_name
     actor.last_name = actor[:last_name] || actor.last_name
     actor.known_for = actor[:known_for] || actor.known_for
-    actor.save
-    if actor.save == false
-      render json: actor.errors.full_messages.to_json
+    if actor.save
+      render json: actor
     else
-      render json: {message: actor.save}
+      render json: actor.errors.full_messages.to_json
     end
 
   end
@@ -35,10 +34,10 @@ class ActorsController < ApplicationController
       age: params[:age]
     })
     actor.save
-    if actor.save == false
-      render json: actor.errors.full_messages.to_json
+    if actor.save
+      render json: actor
     else
-      render json: {message: actor.save}
+      render json: actor.errors.full_messages.to_json
     end
   end
 end
